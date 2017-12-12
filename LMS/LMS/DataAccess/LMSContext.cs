@@ -8,7 +8,7 @@ using System.Web;
 
 namespace LMS.DataAccess
 {
-    public class LMSContext : IdentityDbContext<ApplicationUser>
+    public class LMSContext : IdentityDbContext<User>
     {
         //public DbSet<Schedule> Schedules { get; set; }
 

@@ -17,9 +17,14 @@ namespace LMS.Controllers
         {
             //schedulesRepo = new GenericRepository<Schedule>();
         }
-
+        
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             ViewBag.Title = "Home Page";
 
             return View();

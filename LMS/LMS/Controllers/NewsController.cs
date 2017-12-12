@@ -1,4 +1,6 @@
-﻿using LMS.Models;
+﻿using LMS.DataAccess;
+using LMS.Models;
+using LMS.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +13,20 @@ namespace LMS.Controllers
 {
     public class NewsController : Controller
     {
-        // GET: News
-        public ActionResult Index()
+
+        private NewsRepository nR = new NewsRepository();
+
+        public ActionResult Feed()
         {
-            return View();
+            var model = nR.ShowFeed();
+
+            return View(model);
         }
 
-        //[HttpPost]
-        //public ActionResult Index(string RSSURL)
-        //{
-        //    WebClient wclient = new WebClient();
-        //    string RSSData = wclient.DownloadString(RSSURL);
-
-        //    XDocument xml = XDocument.Parse(RSSData);
-        //    var RSSFeedData = (from x in xml.Descendants("item")
-        //                       select new RSSFeed
-        //                       {
-        //                           Title = ((string)x.Element("title")),
-                                   
-        //                       });
-        //}
+        public ActionResult Create(string title, string breadtext)
+        {
+            nR.AddToFeed(title, breadtext);
+            return View();
+        }
     }
 }

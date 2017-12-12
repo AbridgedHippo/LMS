@@ -1,0 +1,18 @@
+﻿@model IEnumerable<LMS.Models.Newsfeed>
+
+@{
+    ViewBag.Title = "Newsfeed";
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        <h4>@item.Title</h4>
+        <div>@item.PubDate, @item.BreadText</div>
+        <hr />
+    </div>
+}
+
+<div>
+    
+</div>

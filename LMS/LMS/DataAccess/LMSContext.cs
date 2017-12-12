@@ -18,5 +18,7 @@ namespace LMS.DataAccess
         {
             return new LMSContext();
         }
+
+        public System.Data.Entity.DbSet<LMS.Models.Newsfeed> Newsfeeds { get; set; }
     }  
 }

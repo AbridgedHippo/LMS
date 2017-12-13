@@ -5,7 +5,11 @@ using System.Web;
 
 namespace LMS.Models
 {
-	public class ScheduleModels
-	{
-	}
+    public class Schedule
+    {
+        public Schedule()
+        {
+
+        }
+    }
 }

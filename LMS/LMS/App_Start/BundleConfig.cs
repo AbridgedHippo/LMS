@@ -22,7 +22,9 @@ namespace LMS
             
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.min.js",
-                      "~/App/App.js")); // Add more .js files here
+                      "~/Scripts/angular-route.min.js",
+                      "~/App/App.js",
+                      "~/App/AccountController.js")); // Add more .js files here
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

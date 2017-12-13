@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+<div id="loginDiv" ng-controller="AccountController as self">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="form-div">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button class="btn btn-info" ng-click="self.logOut()">Account</button>
+                </li>
+                <li>
+                    <button class="btn btn-info" ng-click="self.logOut()">Log Out</button>
+                </li>
+            </ul>
+        </div>
+
+    }
+    else
+    {
+        <div class="form-div">
+            <form ng-submit="self.requestLogin()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <input class="form-control" required type="text" ng-model="self.login.UserName" placeholder="Username" />
+                    </li>
+                    <li>
+                        <input class="form-control" required type="password" ng-model="self.login.Password" placeholder="Password" />
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-info">Login</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    }
+</div>

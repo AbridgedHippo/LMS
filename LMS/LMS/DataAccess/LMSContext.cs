@@ -8,17 +8,18 @@ using System.Web;
 
 namespace LMS.DataAccess
 {
-    public class LMSContext : IdentityDbContext<ApplicationUser>
+    public class LMSContext : IdentityDbContext<User>
     {
         //public DbSet<Schedule> Schedules { get; set; }
 
-        public LMSContext() : base("DefaultConnection", throwIfV1Schema: false) {}
+        public LMSContext() : base("DefaultConnection", throwIfV1Schema: false) { }
 
         public static LMSContext Create()
         {
             return new LMSContext();
         }
 
-        public System.Data.Entity.DbSet<LMS.Models.Newsfeed> Newsfeeds { get; set; }
-    }  
+        public DbSet<Newsfeed> Feeds { get; set; }
+    }
+
 }

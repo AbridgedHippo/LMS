@@ -13,19 +13,19 @@ namespace LMS.Controllers
 {
     public class NewsController : Controller
     {
-
-        private NewsRepository nR = new NewsRepository();
+        private GenericRepository<Newsfeed> repo = new GenericRepository<Newsfeed>();
 
         public ActionResult Feed()
         {
-            var model = nR.ShowFeed();
-
+            var model = repo.GetAll();
             return View(model);
         }
 
+        [RedirectAuthorize(Roles = "Admin")]
         public ActionResult Create(string title, string breadtext)
         {
-            nR.AddToFeed(title, breadtext);
+            repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.Today});
+            
             return View();
         }
     }

@@ -12,11 +12,14 @@ namespace LMS.DataAccess
     {
         //public DbSet<Schedule> Schedules { get; set; }
 
-        public LMSContext() : base("DefaultConnection", throwIfV1Schema: false) {}
+        public LMSContext() : base("DefaultConnection", throwIfV1Schema: false) { }
 
         public static LMSContext Create()
         {
             return new LMSContext();
         }
-    }  
+
+        public DbSet<Newsfeed> Feeds { get; set; }
+    }
+
 }

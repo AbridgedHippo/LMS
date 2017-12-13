@@ -20,4 +20,19 @@ namespace LMS
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
+
+    public class RedirectAuthorize : System.Web.Mvc.AuthorizeAttribute
+    {
+        protected override void HandleUnauthorizedRequest(AuthorizationContext context)
+        {
+            if (context.HttpContext.User.Identity.IsAuthenticated)
+            {
+                context.Result = new RedirectResult("/Error");
+            }
+            else
+            {
+                context.Result = new RedirectResult("/Home/Index");
+            }
+        }
+    }
 }

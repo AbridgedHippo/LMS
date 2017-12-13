@@ -30,3 +30,17 @@ textarea {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
+.newsfeed {
+    position: absolute;
+    width: 200px;
+    height: 500px;
+    overflow:auto;
+    overflow-y: hidden!important;
+    right: 100%;
+    left: 1%;
+}
+
+.newsfeed th {
+    text-align: left;
+}

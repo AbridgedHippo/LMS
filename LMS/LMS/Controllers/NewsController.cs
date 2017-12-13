@@ -21,10 +21,16 @@ namespace LMS.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [RedirectAuthorize(Roles = "Admin")]
+        [HttpPost]
         public ActionResult Create(string title, string breadtext)
         {
-            repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.Today});
+            repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.UtcNow});
             
             return View();
         }

@@ -1,10 +1,5 @@
 ﻿@model LMS.Models.Newsfeed
 
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -39,5 +34,9 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Feed")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

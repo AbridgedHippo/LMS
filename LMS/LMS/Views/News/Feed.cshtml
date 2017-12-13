@@ -1,16 +1,9 @@
-﻿@model IEnumerable<LMS.Models.Newsfeed>
-
-@{
+﻿@{
     ViewBag.Title = "Newsfeed";
 }
 
-<div class="newsfeed">
-    <marquee behavior="scroll" direction="up" scrollamount="2"
-             style="height:200px">
         @foreach (var item in Model)
         {
-            <h4>@item.Title</h4>
-            <div>@item.PubDate, @item.BreadText</div>
+            @Html.Partial("_Newsfeed")
         }
-    </marquee>
-</div>
+

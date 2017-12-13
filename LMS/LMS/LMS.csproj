@@ -326,10 +326,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\News\Feed.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\Create.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\News\_Newsfeed.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712120913122_InitialCreate.resx">

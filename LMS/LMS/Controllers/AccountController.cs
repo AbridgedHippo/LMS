@@ -61,6 +61,7 @@ namespace LMS.Controllers
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             var Session = HttpContext.Current.Session;
+
             if(Session != null)
             {
                 Session.Clear();

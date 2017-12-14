@@ -15,6 +15,12 @@ namespace LMS.Controllers
     {
         private GenericRepository<Newsfeed> repo = new GenericRepository<Newsfeed>();
 
+        public ActionResult PartialFeed()
+        {
+            var model = repo.GetAll();
+            return PartialView("_Newsfeed", model);
+        }
+
         public ActionResult Feed()
         {
             var model = repo.GetAll();

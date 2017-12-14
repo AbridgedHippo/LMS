@@ -1,0 +1,16 @@
+﻿@model IEnumerable<LMS.Models.Newsfeed>
+
+<div class="newsfeed">
+    <marquee behavior="scroll" direction="up" scrollamount="1"
+             style="height:200px">
+        @foreach (var item in Model)
+        {
+            <div>
+                @Html.DisplayFor(Model => item.Title)
+                @Html.DisplayFor(Model => item.PubDate)
+                @Html.DisplayFor(Model => item.BreadText)
+            </div>
+            <br />
+        }
+    </marquee>
+</div>

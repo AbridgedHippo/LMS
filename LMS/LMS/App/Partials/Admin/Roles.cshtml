@@ -1,15 +1,10 @@
 ﻿
 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <a href="/Admin" class="previous" admin-link>&laquo; Back</a>
-    <div class="form-div">
-        <form ng-submit="$ctrl.createRole()">
-            <ul class="list-inline list-unstyled">
-                <li><input class="form-control" required type="text" ng-model="$ctrl.newRole.Name" placeholder="Name" /></li>
-                <li><button type="submit" class="btn btn-info">Create Role</button></li>
-            </ul>
-        </form>
-    </div>
+{    
+    <ul class="list-unstyled list-inline">
+        <li><a href="/Admin" class="previous btn btn-default" admin-link>&laquo; Back</a><br /></li>
+        <li><button class="btn btn-info" ng-click="$ctrl.createRoleDialog()">Create New Role</button></li>
+    </ul>
     <div>
         <div>
             <h3>{{$ctrl.statusMsg}}</h3>
@@ -21,8 +16,8 @@
                     <td>{{role.Name}}</td>
                     <td>
                         <button class="btn btn-sm btn-info">Details</button>
-                        <button class="btn btn-sm btn-warning" ng-click="$ctrl.editRole(role)">Edit</button>
-                        <button class="btn btn-sm btn-danger" ng-click="$ctrl.deleteRole(role)">Delete</button>
+                        <button class="btn btn-sm btn-warning" ng-click="$ctrl.editRoleDialog(role)">Edit</button>
+                        <button class="btn btn-sm btn-danger" ng-click="$ctrl.deleteRoleDialog(role)">Delete</button>
                     </td>
                 </tr>
             </table>

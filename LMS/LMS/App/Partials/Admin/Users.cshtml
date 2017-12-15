@@ -2,8 +2,10 @@
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
-    <a href="/Admin" class="previous" admin-link>&laquo; Back</a><br />
-    <button class="btn btn-success btn-sm" ng-click="$ctrl.createDialog()">Create New User</button>
+    <ul class="list-unstyled list-inline">
+        <li><a href="/Admin" class="previous btn btn-default" admin-link>&laquo; Back</a><br /></li>
+        <li><button class="btn btn-info" ng-click="$ctrl.createDialog()">Create New User</button></li>
+    </ul>
     <div>
         <div>
             <h3>{{$ctrl.statusMsg}}</h3>

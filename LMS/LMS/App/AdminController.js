@@ -1,13 +1,14 @@
 ﻿(function () {
 
-    var app = angular.module("AdminApp").controller("AdminController", ["Helpers", "BootstrappedData", "$scope", "$uibModal", function (Helpers, BootstrappedData, $scope, $uibModal) {
+    var app = angular.module("AdminApp").controller("AdminController", ["Helpers", "AdminRepository", "$scope", "$uibModal", function (Helpers, AdminRepository, $scope, $uibModal) {
         "use strict";
 
         var $ctrl = this;
+        var repo = AdminRepository;
 
         $ctrl.newUser = {
-            FirstName: "Adam",
-            LastName: "Jonsson",
+            FirstName: "Per",
+            LastName: "Persson",
             Role: "Student"
         };
         $ctrl.newRole = {
@@ -15,17 +16,24 @@
         };
 
         $ctrl.init = function () {
-            $ctrl.users = BootstrappedData.data.Users;
-            $ctrl.roles = BootstrappedData.data.Roles;
+            $ctrl.users = repo.initUsers();
+            $ctrl.roles = repo.initRoles();
         };
 
+        // User Modals
         $ctrl.createDialog = function () {
             $uibModal.open({
                 templateUrl: "/App/Partials/Modals/CreateUserModal.cshtml",
                 scope: $scope
             })
                 .result.then(function () {
-                    createUser();
+                    repo.createUser($ctrl.newUser)
+                        .then(function (response) {
+                            $ctrl.statusMsg = response.data;
+                            updateUsers();
+                        }, function (error) {
+                            $ctrl.statusMsg = error.data;
+                        });
                 }, function () {
                 });
         };
@@ -36,9 +44,15 @@
                 scope: $scope
             })
                 .result.then(function () {
-                    editUser();
-                }, function () {
+                    repo.editUser($ctrl.editUser)
+                        .then(function (response) {
+                            $ctrl.statusMsg = response.data;
+                            updateUsers();
+                        }, function (error) {
+                            $ctrl.statusMsg = error.data;
+                        });
                     $ctrl.editUser = null;
+                }, function () {
                 });
         };
         $ctrl.deleteDialog = function (user) {
@@ -48,78 +62,89 @@
                 scope: $scope
             })
                 .result.then(function () {
-                    deleteUser();
-                }, function () {
+                    repo.deleteUser(user)
+                        .then(function (response) {
+                            $ctrl.statusMsg = response.data;
+                            updateUsers();
+                        }, function (error) {
+                            $ctrl.statusMsg = error.data;
+                        });
                     $ctrl.deleteUser = null;
+                }, function () {
                 });
         };
 
-        // users
-        $ctrl.users = [];
-        var getUsers = function () {
-            Helpers.postData("/api/admin/getusers")
+        // Role Modals
+        $ctrl.createRoleDialog = function () {
+            $uibModal.open({
+                templateUrl: "/App/Partials/Modals/CreateRoleModal.cshtml",
+                scope: $scope
+            })
+                .result.then(function () {
+                    repo.createRole($ctrl.newRole)
+                        .then(function (response) {
+                            $ctrl.statusMsg = response.data;
+                            updateRoles();
+                        }, function (error) {
+                            $ctrl.statusMsg = error.data;
+                        });
+                }, function () {
+                });
+        };
+        $ctrl.editRoleDialog = function (role) {
+            $ctrl.editRole = copyRole(role);
+            $uibModal.open({
+                templateUrl: "/App/Partials/Modals/EditRoleModal.cshtml",
+                scope: $scope
+            })
+                .result.then(function () {
+                    repo.editRole($ctrl.editRole)
+                        //.then(function (response) {
+                        //    $ctrl.statusMsg = response.data;
+                        //    updateRoles();
+                        //}, function (error) {
+                        //    $ctrl.statusMsg = error.data;
+                        //});
+                    $ctrl.editRole = null;
+                }, function () {
+                });
+        };
+        $ctrl.deleteRoleDialog = function (role) {
+            $ctrl.deleteRole = role;
+            $uibModal.open({
+                templateUrl: "/App/Partials/Modals/DeleteRoleModal.cshtml",
+                scope: $scope
+            })
+                .result.then(function () {
+                    repo.deleteRole(role)
+                        .then(function (response) {
+                            $ctrl.statusMsg = response.data;
+                            updateRoles();
+                        }, function (error) {
+                            $ctrl.statusMsg = error.data;
+                        });
+                    $ctrl.deleteRole = null;
+                }, function () {
+                });
+        };
+
+        // helpers
+        var updateUsers = function () {
+            repo.updateUsers()
                 .then(function (response) {
                     $ctrl.users = response.data;
-                });
-        };
-        var createUser = function () {
-            Helpers.postData("/api/admin/createuser", $ctrl.newUser)
-                .then(function (response) {
-                    $ctrl.statusMsg = response.data;
-                    getUsers();
                 }, function (error) {
                     $ctrl.statusMsg = error.data;
-                });
+                });;
         };
-        var deleteUser = function () {
-            Helpers.postData("/api/admin/DeleteUser", $ctrl.deleteUser)
+        var updateRoles = function () {
+            repo.updateRoles()
                 .then(function (response) {
-                    $ctrl.statusMsg = response.data;
-                    getUsers();
+                    $ctrl.roles = response;
                 }, function (error) {
                     $ctrl.statusMsg = error.data;
-                });
-        };
-        var editUser = function () {
-            Helpers.postData("/api/admin/EditUser", $ctrl.editUser)
-                .then(function (response) {
-                    $ctrl.statusMsg = response.data;
-                    getUsers();
-                }, function (error) {
-                    $ctrl.statusMsg = error.data;
-                });
-        };
-
-        // roles
-        $ctrl.roles = [];
-        var getRoles = function () {
-            Helpers.postData("/api/admin/getroles")
-                .then(function (response) {
-                    $ctrl.roles = response.data;
-                });
-        };
-        $ctrl.createRole = function () {
-            Helpers.postData("/api/admin/createrole", $ctrl.newRole)
-                .then(function (response) {
-                    $ctrl.statusMsg = response.data;
-                    getRoles();
-                }, function (error) {
-                    $ctrl.statusMsg = error.data;
-                });
-        };
-        $ctrl.deleteRole = function (role) {
-            Helpers.postData("/api/admin/DeleteRole", role)
-                .then(function (response) {
-                    $ctrl.statusMsg = response.data;
-                    getRoles();
-                }, function (error) {
-                    $ctrl.statusMsg = error.data;
-                });
-        };
-        $ctrl.editRole = function (role) {
-            alert(role);
-        };
-
+                });;
+        };       
         var copyUser = function (user) {
             return {
                 Id: user.Id,
@@ -128,6 +153,12 @@
                 FirstName: user.FirstName,
                 LastName: user.LastName,
                 Role: user.Role
+            };
+        };
+        var copyRole = function (role) {
+            return {
+                Id: role.Id,
+                Name: role.Name
             };
         };
 

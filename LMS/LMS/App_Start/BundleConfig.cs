@@ -32,7 +32,8 @@ namespace LMS
                       "~/App/App.js",
                       "~/App/Services/Helpers.js",
                       "~/App/AccountController.js",
-                      "~/App/AdminController.js"
+                      "~/App/AdminController.js",
+                      "~/App/Services/AdminRepository.js"
                       )); // Add more .js files here
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        @Html.Partial("MenuPartials/AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("MenuPartials/AuthenticatedMenu")
+    }
+}
+else
+{
+    @Html.Partial("MenuPartials/NotAuthenticatedMenu")
+}

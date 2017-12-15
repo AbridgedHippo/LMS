@@ -209,10 +209,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712150847356_JimmyUpdate.cs" />
-    <Compile Include="Migrations\201712150847356_JimmyUpdate.Designer.cs">
-      <DependentUpon>201712150847356_JimmyUpdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -233,6 +229,7 @@
     <Content Include="App\AccountController.js" />
     <Content Include="App\AdminController.js" />
     <Content Include="App\App.js" />
+    <Content Include="App\Services\AdminRepository.js" />
     <Content Include="App\Services\Helpers.js" />
     <Content Include="App_Data\LMSDB.mdf" />
     <Content Include="App_Data\LMSDB_log.ldf">
@@ -283,6 +280,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="App\Partials\Modals\CreateRoleModal.cshtml" />
+    <Content Include="App\Partials\Modals\DeleteRoleModal.cshtml" />
+    <Content Include="App\Partials\Modals\EditRoleModal.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -317,16 +317,16 @@
     <Content Include="Views\Shared\LoginPartials\NotAuthenticated.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Views\Shared\MenuPartials\NotAuthenticatedMenu.cshtml" />
+    <Content Include="Views\Shared\MenuPartials\AuthenticatedMenu.cshtml" />
+    <Content Include="Views\Shared\MenuPartials\AdminMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712150847356_JimmyUpdate.resx">
-      <DependentUpon>201712150847356_JimmyUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -27,6 +27,8 @@ namespace LMS.Controllers
             return View(model);
         }
 
+
+        [RedirectAuthorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -36,9 +38,9 @@ namespace LMS.Controllers
         [HttpPost]
         public ActionResult Create(string title, string breadtext)
         {
-            repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.UtcNow});
+            repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.Today});
             
-            return View();
+            return View("~/Views/Home/Index.cshtml");
         }
     }
 }

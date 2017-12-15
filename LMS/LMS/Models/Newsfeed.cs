@@ -11,5 +11,6 @@ namespace LMS.Models
         public string Title { get; set; }
         public DateTime PubDate { get; set; }
         public string BreadText { get; set; }
+        public string RssLink { get; set; }
     }
 }

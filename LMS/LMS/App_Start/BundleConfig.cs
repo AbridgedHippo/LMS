@@ -22,12 +22,21 @@ namespace LMS
             
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.min.js",
-                      "~/Scripts/angular-route.min.js",
+                      "~/Scripts/angular-animate.min.js",
+                      "~/Scripts/angular-touch.min.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+                      "~/Scripts/angular-route.min.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/App/App.js",
-                      "~/App/AccountController.js")); // Add more .js files here
+                      "~/App/Services/Helpers.js",
+                      "~/App/AccountController.js",
+                      "~/App/AdminController.js"
+                      )); // Add more .js files here
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
         }
     }

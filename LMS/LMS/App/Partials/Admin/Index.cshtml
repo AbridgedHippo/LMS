@@ -1,0 +1,11 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <a class="btn btn-info" href="/Admin/Users" admin-link>Users</a>
+    <a href="/Admin/Roles" admin-link>Roles</a>
+}
+else
+{
+    Response.Redirect("~/");
+}

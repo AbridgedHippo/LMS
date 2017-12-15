@@ -34,7 +34,7 @@
     </div>
 
 
-    <div class="container body-content ng-view">
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
@@ -45,6 +45,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @RenderSection("BootstrapJSONData", required: false)
+    }
     @RenderSection("scripts", required: false)
 </body>
 </html>

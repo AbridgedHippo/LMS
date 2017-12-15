@@ -202,16 +202,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageAccountController.cs" />
+    <Compile Include="Controllers\LMSApiController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712120913122_InitialCreate.cs" />
-    <Compile Include="Migrations\201712120913122_InitialCreate.Designer.cs">
-      <DependentUpon>201712120913122_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201712150808102_initial.cs" />
+    <Compile Include="Migrations\201712150808102_initial.Designer.cs">
+      <DependentUpon>201712150808102_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -222,9 +222,10 @@
     <Compile Include="Models\ScheduleModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -232,16 +233,30 @@
     <Content Include="App\AccountController.js" />
     <Content Include="App\AdminController.js" />
     <Content Include="App\App.js" />
+    <Content Include="App\Services\Helpers.js" />
     <Content Include="App_Data\LMSDB.mdf" />
     <Content Include="App_Data\LMSDB_log.ldf">
       <DependentUpon>LMSDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-touch.js" />
+    <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -250,6 +265,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="App\Partials\Admin\Index.cshtml" />
+    <Content Include="App\Partials\Admin\Roles.cshtml" />
+    <Content Include="App\Partials\Admin\Users.cshtml" />
+    <Content Include="App\Partials\Modals\AccountModal.cshtml" />
+    <Content Include="App\Partials\Modals\CreateUserModal.cshtml" />
+    <Content Include="App\Partials\Modals\DeleteUserModal.cshtml" />
+    <Content Include="App\Partials\Modals\EditUserModal.cshtml" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -278,15 +307,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Feed.cshtml" />
     <Content Include="Views\Create.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\Shared\_Newsfeed.cshtml" />
     <Content Include="Views\News\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712120913122_InitialCreate.resx">
-      <DependentUpon>201712120913122_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Views\Shared\LoginPartials\Authenticated.cshtml" />
+    <Content Include="Views\Shared\LoginPartials\NotAuthenticated.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -302,7 +328,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\ManageAccount\" />
+    <EmbeddedResource Include="Migrations\201712150808102_initial.resx">
+      <DependentUpon>201712150808102_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

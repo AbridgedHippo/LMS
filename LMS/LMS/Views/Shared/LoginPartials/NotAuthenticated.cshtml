@@ -1,0 +1,15 @@
+﻿<div class="form-div">
+    <form ng-submit="$ctrl.requestLogin()">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <input class="form-control" required type="text" ng-model="$ctrl.login.UserName" placeholder="Username" />
+            </li>
+            <li>
+                <input class="form-control" required type="password" ng-model="$ctrl.login.Password" placeholder="Password" />
+            </li>
+            <li>
+                <button type="submit" class="btn btn-info">Login</button>
+            </li>
+        </ul>
+    </form>
+</div>

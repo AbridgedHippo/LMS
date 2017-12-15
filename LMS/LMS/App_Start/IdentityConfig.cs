@@ -15,6 +15,11 @@ namespace LMS
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
+            UserValidator = new UserValidator<User>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

@@ -1,67 +1,73 @@
 ﻿(function () {
     // main module
-    var app = angular.module("LMSApp").controller("AccountController", ["$http", "$window", function ($http, $window) {
+    var app = angular.module("AccApp").controller("AccountController", ["Helpers", "$scope", "$uibModal", function (Helpers, $scope, $uibModal) {
         "use strict";
-
-        var self = this;
-        self.login = {
+        var $ctrl = this;
+        $ctrl.user = JSON.parse(Helpers.getSessionId("User"));
+        $ctrl.login = {
             "UserName": "Admin",
             "Password": "Admin-1234"
         };
+        $ctrl.passwords = {
+            OldPassword: "",
+            NewPassword: "",
+            ConfirmPassword: ""
+        };
+        $ctrl.response = "";
 
-        self.requestLogin = function () {
+        $ctrl.account = function () {
+            $uibModal.open({
+                templateUrl: "/App/Partials/Modals/AccountModal.cshtml",
+                scope: $scope
+            })
+                .result.then(function () {
+                    $ctrl.changePassword();
+                }, function () {
+                });
+        };
+
+        $ctrl.changePassword = function () {
+            Helpers.postData("/api/account/changepassword", $ctrl.passwords)
+                .then(function (response) {
+                    $ctrl.response = response.data;
+                    console.log($ctrl.response);
+                }, function (error) {
+                    $ctrl.response = error.data;
+                    console.log($ctrl.response);
+                });
+
+        };
+
+        $ctrl.requestLogin = function () {
             var data = "grant_type=password&username="
-                + self.login.UserName
+                + $ctrl.login.UserName
                 + "&password="
-                + self.login.Password;
+                + $ctrl.login.Password;
 
-            $http.post("/Token", data)
-                .then(function (promise) {
-                    self.user = promise.data.userName;
-                    $window.sessionStorage.setItem("tokenKey", promise.data.access_token);
-                    $window.sessionStorage.setItem("startUrl", document.location.href);
-                    goTo(getStartUrl());
+            Helpers.postData("/Token", data)
+                .then(function (response) {
+                    var user = {
+                        UserName: response.data.userName,
+                        Email: "",
+                        Id: ""
+                    };
+                    Helpers.setSessionId("User", JSON.stringify(user));
+                    Helpers.setTokenKey(response.data.access_token);
+                    Helpers.goTo("/");
+                }, function (error) {
+                    $ctrl.response = error.data;
                 });
         };
 
-        self.logOut = function () {
-            $http.post("/api/account/logout")
-                .then(function (promise) {
-                    console.log("Logged out!: " + promise.data);
-                    var startUrl = getStartUrl();
-                    $window.localStorage.clear();
-                    $window.sessionStorage.clear();
-                    goTo(startUrl);
+        $ctrl.logOut = function () {
+            Helpers.postData("/api/account/logout")
+                .then(function (response) {
+                    $ctrl.response = response.data;
+                    Helpers.clearStorage();
+                    Helpers.goTo("/");
+                }, function (error) {
+                    $ctrl.response = error.data;
                 });
         };
-
-        self.requestData = function () {
-            var config = getSessionTokenConfig();
-
-            $http.get("/api/values", config)
-                .then(function (promise) {
-                });
-        };
-
-        var goTo = function (targetUrl) {
-            document.location.href = targetUrl;
-        };
-        var getSessionToken = function () {
-            return $window.sessionStorage.getItem("tokenKey");
-        };
-        var getStartUrl = function () {
-            return $window.sessionStorage.getItem("startUrl");
-        };
-        var getSessionTokenConfig = function () {
-            var token = getSessionToken();
-            var headers = {};
-            if (token) {
-                headers.Authorization = "Bearer " + token;
-            }
-            return { headers: headers };
-        };
-
-        self.startUrl = null;
-
     }]);
 })();

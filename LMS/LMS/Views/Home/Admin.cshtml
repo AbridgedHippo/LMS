@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewBag.Title = "Admin Index";
+}
+@section BootstrapJSONData
+{
+<script>
+    "use strict";
+        angular.module("AdminApp").factory("BootstrappedData", function () {
+            return {
+                data: @Html.Raw(Model)
+            };
+        });
+</script>    
+}
+<div ng-app="AdminApp" ng-controller="AdminController as $ctrl" ng-init="$ctrl.init()">
+    <h1>ADMIN {{$ctrl.data}}</h1>
+
+    <div ng-view></div>
+</div>

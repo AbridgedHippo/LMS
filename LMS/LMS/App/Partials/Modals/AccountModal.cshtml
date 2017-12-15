@@ -1,0 +1,30 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Change Password</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-div">
+            <form>
+                <ul class="list-group list-inline list-unstyled">
+                    <li><input class="form-control" required type="password" ng-model="$ctrl.passwords.OldPassword" placeholder="Password" /></li>
+                    <li><input class="form-control" required type="password" ng-model="$ctrl.passwords.NewPassword" placeholder="New Password" /></li>
+                    <li><input class="form-control" required type="password" ng-model="$ctrl.passwords.ConfirmPassword" placeholder="Confirm New Password" /></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="$close()">Change Password</button>
+    </div>
+}
+else
+{
+    Response.Redirect("~/");
+}

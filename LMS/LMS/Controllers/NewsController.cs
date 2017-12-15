@@ -39,8 +39,8 @@ namespace LMS.Controllers
         public ActionResult Create(string title, string breadtext)
         {
             repo.Add(new Newsfeed { Title = title, BreadText = breadtext, PubDate = DateTime.Today});
-            
-            return View("~/Views/Home/Index.cshtml");
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

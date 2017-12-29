@@ -10,21 +10,13 @@ namespace LMS
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class ApplicationUserManager : UserManager<User>
+    public class LMSUserManager : UserManager<User>
     {
-        public ApplicationUserManager(IUserStore<User> store)
-            : base(store)
-        {
-            UserValidator = new UserValidator<User>(this)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
-        }
+        public LMSUserManager(IUserStore<User> store) : base(store) {}
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static LMSUserManager Create(IdentityFactoryOptions<LMSUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<LMSContext>()));
+            var manager = new LMSUserManager(new UserStore<User>(context.Get<LMSContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)
             {
@@ -45,6 +37,22 @@ namespace LMS
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+            return manager;
+        }
+    }
+
+    public class LMSRoleManager : RoleManager<IdentityRole>
+    {
+        public LMSRoleManager(RoleStore<IdentityRole> store) : base(store) {}
+
+        public static LMSRoleManager Create(IdentityFactoryOptions<LMSRoleManager> options, IOwinContext context)
+        {
+            var manager = new LMSRoleManager(new RoleStore<IdentityRole>(context.Get<LMSContext>()));
+            // Configure validation logic for Roles
+            manager.RoleValidator = new RoleValidator<IdentityRole>(manager)
+            {
+                //
+            };
             return manager;
         }
     }

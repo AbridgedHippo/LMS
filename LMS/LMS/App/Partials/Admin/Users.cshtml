@@ -3,7 +3,6 @@
 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
     <ul class="list-unstyled list-inline">
-        <li><a href="/Admin" class="previous btn btn-default" admin-link>&laquo; Back</a><br /></li>
         <li><button class="btn btn-info" ng-click="$ctrl.createDialog()">Create New User</button></li>
     </ul>
     <div>
@@ -13,20 +12,14 @@
                 <tr>
                     <th>Username</th>
                     <th>Role</th>
-                    <th>Email</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
                     <th>Options</th>
                 </tr>
                 <tr ng-repeat="user in $ctrl.users">
                     <td>{{user.UserName}}</td>
                     <td>{{user.Role}}</td>
-                    <td>{{user.Email}}</td>
-                    <td>{{user.FirstName}}</td>
-                    <td>{{user.LastName}}</td>
                     <td>
-                        <button class="btn btn-sm btn-info">Details</button>
-                        <button class="btn btn-sm btn-warning" ng-click="$ctrl.editDialog(user)">Edit</button>
+                        <button class="btn btn-sm btn-warning" ng-click="$ctrl.setPasswordDialog(user)">Set Password</button>
+                        <button class="btn btn-sm btn-info" ng-click="$ctrl.editDialog(user)">Details</button>
                         <button class="btn btn-sm btn-danger" ng-click="$ctrl.deleteDialog(user)">Delete</button>
                     </td>
                 </tr>

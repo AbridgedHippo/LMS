@@ -15,5 +15,11 @@
 }
 <div ng-app="AdminApp" ng-controller="AdminController as $ctrl" ng-init="$ctrl.init()">
     <br />
+    <ul class="list-unstyled list-inline">
+        <li><a href="/Admin" class="previous btn btn-default" admin-link>&laquo; Index</a><br /></li>
+        <li><a class="btn btn-default" href="/Admin/Users" admin-link>Users</a></li>
+        <li><a class="btn btn-default" href="/Admin/Roles" admin-link>Roles</a></li>
+        <li><a class="btn btn-default" href="/Admin/Courses" admin-link>Courses</a></li>
+    </ul>
     <div ng-view></div>
 </div>

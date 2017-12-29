@@ -4,29 +4,61 @@ using Microsoft.AspNet.Identity;
 using LMS.Models;
 using LMS.Repositories;
 
+using System;
+using System.Net.Http;
+using System.Security.Cryptography;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+
 namespace LMS.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : LMSApiController
     {
-        private AccountRepository repo;
-        
-        public AccountController()
+        #region Fields & Properties
+        private LMSUserManager _userManager;
+        public LMSUserManager UserManager
         {
-            repo = new AccountRepository();
+            get
+            {
+                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<LMSUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
-        
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+        #endregion
+
+        public AccountController() {}
+        public AccountController(LMSUserManager userManager, ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            UserManager = userManager;
+            AccessTokenFormat = accessTokenFormat;
+        }
+
+        #region Implementation
         // POST api/Account/Logout
         [AllowAnonymous]
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            repo.LogOut();
-            return Ok();
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
 
+            var Session = HttpContext.Current.Session;
+            if (Session != null)
+            {
+                Session.Clear();
+                Session.RemoveAll();
+            }
+
+            return Ok();
         }
-        
+
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -36,8 +68,8 @@ namespace LMS.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await repo.ChangePassword(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -46,45 +78,34 @@ namespace LMS.Controllers
             return Ok("Password changed successfully!");
         }
 
-        // POST api/Account/SetPassword
-        [Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        #region Helpers
+        private IAuthenticationManager Authentication
         {
-            if (!ModelState.IsValid)
+            get { return HttpContext.Current.GetOwinContext().Authentication; }
+        }
+
+        private static class RandomOAuthStateGenerator
+        {
+            private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
+
+            public static string Generate(int strengthInBits)
             {
-                return BadRequest(ModelState);
+                const int bitsPerByte = 8;
+
+                if (strengthInBits % bitsPerByte != 0)
+                {
+                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
+                }
+
+                int strengthInBytes = strengthInBits / bitsPerByte;
+
+                byte[] data = new byte[strengthInBytes];
+                _random.GetBytes(data);
+                return HttpServerUtility.UrlTokenEncode(data);
             }
+        }
+        #endregion
 
-            IdentityResult result = await repo.SetPassword(User.Identity.GetUserId(), model.NewPassword);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok("Password set successfully!");
-        }     
-
-        // POST api/Account/Register
-        //[Authorize(Roles="Admin")]
-        //[Route("Register")]
-        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var user = new User() { UserName = model.Email, Email = model.Email };
-
-        //    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
-
-        //    return Ok();
-        //}
+        #endregion
     }
 }

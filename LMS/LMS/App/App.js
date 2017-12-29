@@ -12,6 +12,9 @@
                 .when("/Admin/Users", {
                     templateUrl: "/App/Partials/Admin/Users.cshtml"
                 })
+                .when("/Admin/Courses", {
+                    templateUrl: "/App/Partials/Admin/Courses.cshtml"
+                })
                 .when("/Admin/Roles", {
                     templateUrl: "/App/Partials/Admin/Roles.cshtml"
                 });

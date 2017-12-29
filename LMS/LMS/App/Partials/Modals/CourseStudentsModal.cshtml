@@ -1,0 +1,29 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Teacher to {{ctrl.editCourse.Name}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-div">
+            <table class="table">
+                <tr ng-repeat="student in $ctrl.students">
+                    <td>{{student.UserName}}</td>
+                    <td ng-if="$ctrl.userInCourse(student)"><button class="btn btn-warning" ng-click="$ctrl.removeUserFromCourse(student)">Remove</button></td>
+                    <td ng-if="!$ctrl.userInCourse(student)"><button class="btn btn-info" ng-click="$ctrl.addUserToCourse(student)">Add</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="$close()">Close</button>
+    </div>
+}
+else
+{
+    Response.Redirect("~/");
+}

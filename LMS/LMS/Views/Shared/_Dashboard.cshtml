@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@model LMS.Models.DashboardVM
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        @Html.Partial("DashboardPartials/AdminDashboard")
+    }
+    else if (User.IsInRole("Teacher"))
+    {
+        @Html.Partial("DashboardPartials/TeacherDashboard")
+    }
+    else if (User.IsInRole("Student"))
+    {
+        @Html.Partial("DashboardPartials/StudentDashboard")
+    }
+    else
+    {
+        @Html.Partial("DashboardPartials/DefaultDashboard")
+    }
+}
+else
+{
+    @Html.Partial("DashboardPartials/DefaultDashboard")
+}

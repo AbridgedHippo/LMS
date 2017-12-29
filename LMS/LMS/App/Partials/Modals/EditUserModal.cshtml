@@ -1,7 +1,7 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title">Edit {{$ctrl.editUser.Username}}</h4>
@@ -10,21 +10,22 @@
         <div class="form-div">
             <form>
                 <ul class="list-inline list-unstyled">
-                    <li><input class="form-control" required type="text" ng-model="$ctrl.editUser.UserName" placeholder="Username" /></li>
-                    <li><input class="form-control" required type="email" ng-model="$ctrl.editUser.Email" placeholder="Email" /></li>
-                    <li><input class="form-control" required type="text" ng-model="$ctrl.editUser.FirstName" placeholder="First name" /></li>
-                    <li><input class="form-control" required type="text" ng-model="$ctrl.editUser.LastName" placeholder="Last Name" /></li>
+                    <li><input class="form-control disableable" disabled required type="text" ng-model="$ctrl.editUser.UserName" placeholder="Username" /></li>
+                    <li><input class="form-control disableable" disabled required type="email" ng-model="$ctrl.editUser.Email" placeholder="Email" /></li>
+                    <li><input class="form-control disableable" disabled required type="text" ng-model="$ctrl.editUser.FirstName" placeholder="First name" /></li>
+                    <li><input class="form-control disableable" disabled required type="text" ng-model="$ctrl.editUser.LastName" placeholder="Last Name" /></li>
                     <li>
-                        <select class="form-control" ng-model="$ctrl.editUser.Role">
+                        <select class="form-control disableable" disabled ng-model="$ctrl.editUser.Role">
                             <option ng-repeat="role in $ctrl.roles" value="{{role.Name}}">{{role.Name}}</option>
                         </select>
                     </li>
+                    <li><button type="button" class="btn btn-warning" ng-click="$ctrl.toggleEdit()">Toggle Edit</button></li>
                 </ul>
             </form>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="$close()">Edit User</button>
+        <button type="button" disabled class="btn btn-primary disableable" ng-click="$close()">Save & Close</button>
     </div>
 }

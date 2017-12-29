@@ -1,0 +1,61 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <ul class="list-unstyled list-inline">
+            <li><h4 class="modal-title">Edit {{$ctrl.editCourse.Name}}</h4></li>
+            <li><button class="btn btn-info" ng-click="$ctrl">Schedule</button></li>
+        </ul>
+    </div>
+    <div class="modal-body">
+        <div class="form-div col-md-12">
+            <form>
+                <ul class="list-inline list-unstyled">
+                    <li><input class="disableable form-control" disabled required type="text" ng-model="$ctrl.editCourse.Id" placeholder="Id" /></li>
+                    <li><input class="form-control disableable" disabled required type="text" ng-model="$ctrl.editCourse.Name" placeholder="Name" /></li>
+                    <li><input class="form-control disableable" disabled required type="text" ng-model="$ctrl.editCourse.Description" placeholder="Description" /></li>
+                    <li><button type="button" class="btn btn-warning" ng-click="$ctrl.toggleEdit()">Toggle Edit</button></li>
+                </ul>
+                <div class="col-md-4">
+                    <table class="table">
+                        <caption><button class="btn btn-success" ng-click="$ctrl.courseTeachersDialog($ctrl.editCourse)">Teachers</button></caption>
+                        <tr ng-repeat="teacher in $ctrl.editCourse.Teachers">
+                            <td>
+                                <button class="btn btn-sm btn-info" ng-click="$ctrl.editDialog(teacher)">{{teacher.UserName}}</button>
+                                <button class="btn btn-sm btn-default" ng-click="$ctrl.removeUserFromCourse(teacher)">X</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table class="table">
+                        <caption><button class="btn btn-success" ng-click="$ctrl.courseStudentsDialog($ctrl.editCourse)">Students</button></caption>
+                        <tr ng-repeat="student in $ctrl.editCourse.Students">
+                            <td>
+                                <button class="btn btn-sm btn-info" ng-click="$ctrl.editDialog(student)">{{student.UserName}}</button>
+                                <button class="btn btn-sm btn-default" ng-click="$ctrl.removeUserFromCourse(student)">X</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table class="table">
+                        <caption><button class="btn btn-success" ng-click="$ctrl.courseAssignmentsDialog($ctrl.editCourse)">Create Assignment</button></caption>
+                        <tr ng-repeat="assignment in $ctrl.assignments">
+                            <td>
+                                <button class="btn btn-sm btn-info" ng-click="$ctrl.editAssignmentDialog(assignment)">{{assignment.Name}}</button>
+                                <button class="btn btn-sm btn-default" ng-click="$ctrl.deleteAssignmentFromCourse(assignment)">X</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+        <button type="button" disabled class="btn btn-primary disableable" ng-click="$close()">Save & Close</button>
+    </div>
+}

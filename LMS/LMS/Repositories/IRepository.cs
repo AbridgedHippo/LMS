@@ -13,6 +13,7 @@ namespace LMS.Repositories
     {
         IEnumerable<T> GetAll();
         T Get(int id);
+        T Get(string id);
         T Get(Expression<Func<T, bool>> where);
         void Add(T entity);
         void Update(T entity);
@@ -22,6 +23,7 @@ namespace LMS.Repositories
         // async
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetAsync(int id);
+        Task<T> GetAsync(string id);
         Task<T> GetAsync(Expression<Func<T, bool>> where);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);

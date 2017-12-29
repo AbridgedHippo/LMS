@@ -1,0 +1,31 @@
+﻿@model LMS.Models.DashboardVM
+
+<h1>Teacher Dashboard</h1>
+<p>Coming soon...</p>
+
+@if (Model.UngradedAssignments.Count > 0)
+{
+    <h3>Ungraded Assignments</h3>
+    <table class="table">
+        <tr>
+            <th>Assignment Name</th>
+            <th>Course</th>
+            <th>UserId</th>
+            <th>Grade</th>
+            <th>Options</th>
+        </tr>
+
+        @foreach (var assignment in Model.UngradedAssignments)
+        {
+            <tr>
+                <td>@assignment.Assignment.Name</td>
+                <td>@assignment.Assignment.Course.Name</td>
+                <td>@assignment.UserId</td>
+                <td>@assignment.Grade</td>
+                <td>
+                    @Html.ActionLink("Grade", "GradeAssignment", "Assignments", new { id = @assignment.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}

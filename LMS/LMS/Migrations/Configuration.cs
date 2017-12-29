@@ -17,14 +17,25 @@ namespace LMS.Migrations
 
         protected override void Seed(LMS.DataAccess.LMSContext context)
         {
-
-            if (!context.Roles.Any(r => r.Name == "Admin"))
+            if (!context.Roles.Any(r => r.Name == "Admin" || r.Name == "Student" || r.Name == "Teacher"))
             {
                 var roleStore = new RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-                roleManager.Create(new IdentityRole("Admin"));
+                if (!context.Roles.Any(r => r.Name == "Admin"))
+                {
+                    roleManager.Create(new IdentityRole("Admin"));
+                }
+                if (!context.Roles.Any(r => r.Name == "Student"))
+                {
+                    roleManager.Create(new IdentityRole("Student"));
+                }
+                if (!context.Roles.Any(r => r.Name == "Teacher"))
+                {
+                    roleManager.Create(new IdentityRole("Teacher"));
+                }
             }
+
             if (!context.Users.Any(u => u.UserName == "Admin"))
             {
                 var userStore = new UserStore<User>(context);

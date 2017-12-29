@@ -1,0 +1,28 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Edit {{$ctrl.editAssignment.Name}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-div">
+            <form>
+                <ul class="list-inline list-unstyled">
+                    <li><input class="form-control disableable" disabled ng-model="$ctrl.editAssignment.Name" /></li>
+                    <li><input class="form-control disableable" disabled ng-model="$ctrl.editAssignment.Description" /></li>
+                    <li><input type="datetime" class="form-control disableable" disabled ng-model="$ctrl.editAssignment.Deadline" /></li>
+                </ul>
+                <ul class="list-inline list-unstyled">
+                    <li><button type="button" class="btn btn-warning" ng-click="$ctrl.toggleEdit()">Toggle Edit</button></li>
+                    <li><button class="btn btn-default" ng-click="$ctrl.addFileToAssignment()">Add File</button></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+        <button type="button" disabled class="btn btn-primary disableable" ng-click="$close()">Save & Close</button>
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Create New Course</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-div">
+            <form>
+                <ul class="list-inline list-unstyled">
+                    <li><input class="form-control" required type="text" ng-model="$ctrl.newCourse.Id" placeholder="Name" /></li>
+                    <li><input class="form-control" required type="text" ng-model="$ctrl.newCourse.Name" placeholder="Name" /></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="$close()">Create Course</button>
+    </div>
+}

@@ -1,0 +1,17 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="$dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Delete the Course '{{$ctrl.deleteCourse.Name}}'?</h4>
+    </div>
+    <div class="modal-content">
+        <h3>{{$ctrl.deleteCourse.Name}}</h3>
+        <h3>{{$ctrl.deleteCourse.Id}}</h3>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$dismiss()">No</button>
+        <button type="button" class="btn btn-primary" ng-click="$close()">Yes</button>
+    </div>
+}

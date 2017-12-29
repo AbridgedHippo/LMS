@@ -1,0 +1,55 @@
+﻿@model LMS.Models.DashboardVM
+
+<h1>Student Dashboard</h1>
+<p>Coming soon...</p>
+
+@if (Model.AssignmentsToSubmit.Count > 0)
+{
+    <h3>Assignments To Submit</h3>
+    <table class="table">
+        <tr>
+            <th>Assignment Name</th>
+            <th>Course</th>
+            <th>Deadline</th>
+            <th>Options</th>
+        </tr>
+
+        @foreach (var assignment in Model.AssignmentsToSubmit)
+        {
+            <tr>
+                <td>@assignment.Name</td>
+                <td>@assignment.Course.Name</td>
+                <td>@assignment.Deadline</td>
+                <td>
+                    @Html.ActionLink("Submit", "SubmitAssignment", "Assignments", new { id = @assignment.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+<hr />
+@if (Model.GradedAssignments.Count > 0)
+{
+
+    <h3>Graded Assignments</h3>
+    <table class="table">
+        <tr>
+            <th>Assignment Name</th>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Options</th>
+        </tr>
+
+        @foreach (var assignment in Model.GradedAssignments)
+        {
+            <tr>
+                <td>@assignment.Assignment.Name</td>
+                <td>@assignment.Assignment.Course.Name</td>
+                <td>@assignment.Grade</td>
+                <td>
+                    @Html.ActionLink("Show", "ShowGradedAssignment", "Assignments", new { id = @assignment.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}

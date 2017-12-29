@@ -29,7 +29,7 @@ namespace LMS.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = context.OwinContext.GetUserManager<LMSUserManager>();
 
             User user = await userManager.FindAsync(context.UserName, context.Password);
 

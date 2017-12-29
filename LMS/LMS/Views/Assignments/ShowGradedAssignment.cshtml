@@ -1,0 +1,71 @@
+﻿@model LMS.Models.SubmittedAssignment
+
+@{
+    ViewBag.Title = "GradedAssignment";
+}
+
+<h2>Graded Assignment</h2>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignment.Course.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assignment.Course.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignment.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assignment.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grade)
+        </dd>
+    </dl>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hide From Dashboard" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

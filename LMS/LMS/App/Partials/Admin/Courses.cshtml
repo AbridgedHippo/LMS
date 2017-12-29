@@ -1,0 +1,32 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <ul class="list-unstyled list-inline">
+        <li><button class="btn btn-info" ng-click="$ctrl.createCourseDialog()">Create New Course</button></li>
+    </ul>
+    <div>
+        <div>
+            <h3>{{$ctrl.statusMsg}}</h3>
+            <table class="table">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Options</th>
+                </tr>
+                <tr ng-repeat="course in $ctrl.courses">
+                    <td>{{course.Id}}</td>
+                    <td>{{course.Name}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info" ng-click="$ctrl.editCourseDialog(course)">Details</button>
+                        <button class="btn btn-sm btn-danger" ng-click="$ctrl.deleteCourseDialog(course)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    Response.Redirect("~/");
+}

@@ -202,11 +202,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LMSApiController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,16 +222,18 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
+    <Compile Include="Models\AssignmentModels.cs" />
+    <Compile Include="Models\CourseModels.cs" />
+    <Compile Include="Models\DashboardModels.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LectureModels.cs" />
     <Compile Include="Models\Newsfeed.cs" />
     <Compile Include="Models\ScheduleModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repositories\AccountRepository.cs" />
-    <Compile Include="Repositories\AdminRepository.cs" />
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -296,6 +299,15 @@
     <Content Include="App\Partials\Modals\CreateRoleModal.cshtml" />
     <Content Include="App\Partials\Modals\DeleteRoleModal.cshtml" />
     <Content Include="App\Partials\Modals\EditRoleModal.cshtml" />
+    <Content Include="App\Partials\Admin\Courses.cshtml" />
+    <Content Include="App\Partials\Modals\CreateCourseModal.cshtml" />
+    <Content Include="App\Partials\Modals\DeleteCourseModal.cshtml" />
+    <Content Include="App\Partials\Modals\EditCourseModal.cshtml" />
+    <Content Include="App\Partials\Modals\CourseTeachersModal.cshtml" />
+    <Content Include="App\Partials\Modals\CourseStudentsModal.cshtml" />
+    <Content Include="App\Partials\Modals\EditAssignmentModal.cshtml" />
+    <Content Include="App\Partials\Modals\CreateCourseAssignmentModal.cshtml" />
+    <Content Include="App\Partials\Modals\SetUserPasswordModal.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -334,18 +346,31 @@
     <Content Include="Views\Shared\MenuPartials\NotAuthenticatedMenu.cshtml" />
     <Content Include="Views\Shared\MenuPartials\AuthenticatedMenu.cshtml" />
     <Content Include="Views\Shared\MenuPartials\AdminMenu.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Shared\_Dashboard.cshtml" />
+    <Content Include="Views\Shared\DashboardPartials\AdminDashboard.cshtml" />
+    <Content Include="Views\Shared\DashboardPartials\DefaultDashboard.cshtml" />
+    <Content Include="Views\Shared\DashboardPartials\TeacherDashboard.cshtml" />
+    <Content Include="Views\Shared\DashboardPartials\StudentDashboard.cshtml" />
+    <Content Include="Views\Assignments\SubmitAssignment.cshtml" />
+    <Content Include="Views\Assignments\GradeAssignment.cshtml" />
+    <Content Include="Views\Assignments\Create.cshtml" />
+    <Content Include="Views\Assignments\Delete.cshtml" />
+    <Content Include="Views\Assignments\Details.cshtml" />
+    <Content Include="Views\Assignments\Edit.cshtml" />
+    <Content Include="Views\Assignments\Index.cshtml" />
+    <Content Include="Views\Assignments\ShowGradedAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712221254595_test.resx">
-      <DependentUpon>201712221254595_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712221302083_test1.resx">
-      <DependentUpon>201712221302083_test1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

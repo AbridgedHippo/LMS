@@ -60,6 +60,9 @@ namespace LMS.Controllers
         [Route("CreateUser")]
         public async Task<IHttpActionResult> CreateUser(AdminCreateUserBindingModel model)
         {
+            var temp = User.Identity.GetUserId();
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

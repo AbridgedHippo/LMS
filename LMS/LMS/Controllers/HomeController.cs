@@ -26,10 +26,10 @@ namespace LMS.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Admin");
-            }
+            //if (User.IsInRole("Admin"))
+            //{
+            //    return RedirectToAction("Admin");
+            //}
 
             return View();
         }

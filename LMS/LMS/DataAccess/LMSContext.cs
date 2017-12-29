@@ -20,6 +20,7 @@ namespace LMS.DataAccess
         }
 
         public DbSet<Newsfeed> Feeds { get; set; }
+        public DbSet<File> Files { get; set; }
     }
 
 }

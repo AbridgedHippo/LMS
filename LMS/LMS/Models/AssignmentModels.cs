@@ -47,6 +47,7 @@ namespace LMS.Models
         [Required]
         public string Answer { get; set; }
         public bool Show { get; set; }
+        public string Comment { get; set; }
 
         [Required]
         public int AssignmentId { get; set; }
@@ -73,6 +74,7 @@ namespace LMS.Models
         public string Answer { get; set; }
         [Required]
         public Grade Grade { get; set; }
+        public String Comment { get; set; }
 
         public IEnumerable<SelectListItem> Grades { get; set; }
 

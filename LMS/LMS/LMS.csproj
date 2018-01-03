@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201712291255099_fixo.Designer.cs">
       <DependentUpon>201712291255099_fixo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801031053296_new.cs" />
+    <Compile Include="Migrations\201801031053296_new.Designer.cs">
+      <DependentUpon>201801031053296_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -377,6 +381,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712291255099_fixo.resx">
       <DependentUpon>201712291255099_fixo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031053296_new.resx">
+      <DependentUpon>201801031053296_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

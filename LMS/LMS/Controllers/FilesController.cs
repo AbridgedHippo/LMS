@@ -91,7 +91,7 @@ namespace LMS.Controllers
         }
 
         // POST: api/Files
-        public IHttpActionResult PostFile(object data)
+        public IHttpActionResult PostFile()
         {
             var upload = System.Web.HttpContext.Current.Request.Files;
 

@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    angular.module("LMSApp").factory("FileHandler", function ($http, $window) {
+    angular.module("LMSApp").factory("FileHandler", function ($http, $window, Helpers) {
 
         return {
             uploadFile: uploadFile,
@@ -25,13 +25,15 @@
                 data.append("uploadedFile", files[i]);
             }
 
+            Helpers.postData("/api/files/", data);
+
             // ADD LISTENERS.
             var objXhr = new XMLHttpRequest();
             objXhr.addEventListener("load", transferComplete, false);
 
             // SEND FILE DETAILS TO THE API.
             objXhr.open("POST", "/api/files/");
-            objXhr.setRequestHeader('Authorization', 'Token token="' + $window.sessionStorage.getItem("tokenKey") + '"');
+            //objXhr.setRequestHeader('Authorization', 'Token token="' + $window.sessionStorage.getItem("tokenKey") + '"');
             console.log($window.sessionStorage.getItem("tokenKey"));
             objXhr.send(data);
 

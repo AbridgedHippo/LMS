@@ -18,6 +18,7 @@ namespace LMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //HttpContext.Current.Session.Add("IDString", "object"); // dunno
         }
     }
 

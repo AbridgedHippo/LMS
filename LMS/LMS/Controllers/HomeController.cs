@@ -31,7 +31,7 @@ namespace LMS.Controllers
             // Bootstrapping data for the Dashboard
             if (User.IsInRole("Admin"))
             {
-                // For testing
+                //System.Web.HttpContext.Current.Session["IDString"] = User.Identity.GetUserId();
                 var submitted = new GenericRepository<SubmittedAssignment>().GetAll();
                 model.UngradedAssignments = submitted.Where(a => a.Grade == Grade.U).ToList();
                 model.GradedAssignments = submitted.Where(a => a.Grade != Grade.U && a.Show).ToList();

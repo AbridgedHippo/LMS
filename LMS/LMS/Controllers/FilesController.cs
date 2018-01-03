@@ -32,7 +32,6 @@ using LMS.Repositories;
 
 namespace LMS.Controllers
 {
-    [Authorize]
     public class FilesController : LMSApiController
     {
         private LMSContext db = new LMSContext();
@@ -92,7 +91,7 @@ namespace LMS.Controllers
         }
 
         // POST: api/Files
-        public IHttpActionResult PostFile()
+        public IHttpActionResult PostFile(object data)
         {
             var upload = System.Web.HttpContext.Current.Request.Files;
 
@@ -105,12 +104,11 @@ namespace LMS.Controllers
             {
                 if (upload[i] != null && upload[i].ContentLength > 0)
                 {
-                    var temp = User.Identity.GetUserId();
                     var file = new File
                     {
                         FileName = System.IO.Path.GetFileName(upload[i].FileName),
                         ContentType = upload[i].ContentType,
-                        PublisherId = temp
+                        PublisherId = null //System.Web.HttpContext.Current.Session["IDString"].ToString()
                     };
                     using (var reader = new System.IO.BinaryReader(upload[i].InputStream))
                     {

@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201712221302083_test1.Designer.cs">
       <DependentUpon>201712221302083_test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712291255099_fixo.cs" />
+    <Compile Include="Migrations\201712291255099_fixo.Designer.cs">
+      <DependentUpon>201712291255099_fixo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -369,8 +373,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201712291255099_fixo.resx">
+      <DependentUpon>201712291255099_fixo.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

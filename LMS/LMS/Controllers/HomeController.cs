@@ -57,7 +57,7 @@ namespace LMS.Controllers
                     .Get(s => s.UserId == userId).Courses.ToList();
                 var assignments = new GenericRepository<Assignment>().GetAll().ToList()
                     .Where(a => courses.Any(c => c.Id == a.CourseId)).ToList();
-                assignments.RemoveAll(a => submitted.Any(s => s.AssignmentId == a.Id));
+                assignments.RemoveAll(a => submitted.Any(s => s.AssignmentId == a.Id && s.UserId == userId));
                 model.AssignmentsToSubmit = assignments;
             }
             

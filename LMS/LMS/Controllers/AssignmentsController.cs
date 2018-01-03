@@ -256,6 +256,7 @@ namespace LMS.Controllers
 
             tmp.Grade = model.Grade;
             tmp.Show = true;
+            tmp.Comment = model.Comment;
             tmpRepo.Update(tmp);
 
             return RedirectToAction("Index", "Home");
